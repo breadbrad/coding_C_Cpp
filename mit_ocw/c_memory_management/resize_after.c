@@ -28,20 +28,23 @@ int main(){
 	scanf("%d",&n2);
 
 	//Dynamically change the array to size n2
-	a1 = malloc(n2*sizeof(int));
+	a1 = realloc(a1, n2*sizeof(int));
 
 	//If the new array is a larger size, set all new members to 0. Reason: dont want to use uninitialized variables.
 	if(n2 > n1){
-		int i;
-	for(i=0; i<n2;i++){
-		*(a1+i)=0;
+		int i;		
+		for(i=0; i<n2;i++){
+			*(a1+i)=0;
+		}
+	}
+	for(i=0; i<n2; i++){
 		//Print each element out (to make sure things look right)
 		printf("%d ",*(a1+i));
 	}
 	printf("\n");
 	
 	//Done with array now, done with program :D
-	
+	free(a1);
 	return 0;
 }
-}
+
