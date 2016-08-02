@@ -57,5 +57,44 @@ enum dir_t {
 typedef enum dir_t dir_t;
 dir_t direction = SOUTH; 
 
+/* Singly Linked List */
+struct node {
+	int data;
+	struct node * next;
+};
+typedef struct node node;
+node * head = Null; // Points to beginning of list, set to null initially 
 
+node * add_data(int data) {
+	node * new_node = (node *) malloc (sizeof(node));
+	new_node->data = data;
+	new_node->next = head;
+	head = new_node;
+	return new_node;
+}
 
+node * find_data(int data) {
+	node * current;
+	for(current = head; current->next!=NULL; current=current->next){
+		if(current->data==data) return current;
+	}
+	return NULL;
+}
+void rm_data(int data) {
+	// Special case if the head has the data 
+	if (head->data==data){
+		node * tmp = head;
+		head=head->next;
+		free(tmp);
+		return;
+	}
+	node *prev, *current;
+	for(current=head; current->next!=NULL; current=current->next){
+		if(current->data==data) {
+			prev->next = current->next;
+			free(current);
+			return;
+		}
+		prev = current;
+	}
+}
